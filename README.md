@@ -1,5 +1,9 @@
 # The Science of Emotions
 
+![The Science of Emotions line-art concept](docs/images/project-cover.png)
+
+*Generated line-art concept illustration.*
+
 A small research lab for a simple question: how do emotion labels overlap in real human annotations?
 
 ![The running annotation lab](docs/screenshots/desktop.png)
