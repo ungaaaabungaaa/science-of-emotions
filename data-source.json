@@ -1,0 +1,25 @@
+{
+  "revision": "700de9630a39cf1c0ded1ea7d1092ec0f467c7a7",
+  "files": {
+    "emotions.txt": {
+      "url": "https://raw.githubusercontent.com/google-research/google-research/700de9630a39cf1c0ded1ea7d1092ec0f467c7a7/goemotions/data/emotions.txt",
+      "bytes": 248,
+      "sha256": "45c3ef86782d2a4d7fedcd6d8c111aa0d0e94720689bd164fac94fefb4495a89"
+    },
+    "train.tsv": {
+      "url": "https://raw.githubusercontent.com/google-research/google-research/700de9630a39cf1c0ded1ea7d1092ec0f467c7a7/goemotions/data/train.tsv",
+      "bytes": 3519053,
+      "sha256": "1c254a142be5c00e80d819b9ae1bbd36d94b2eeb8f4b1271846508d57e57d9c5"
+    },
+    "dev.tsv": {
+      "url": "https://raw.githubusercontent.com/google-research/google-research/700de9630a39cf1c0ded1ea7d1092ec0f467c7a7/goemotions/data/dev.tsv",
+      "bytes": 439059,
+      "sha256": "575489c079c9de1097062a01738f998590d6b7ead66dd1c9fd1d2ba01fd8bc62"
+    },
+    "test.tsv": {
+      "url": "https://raw.githubusercontent.com/google-research/google-research/700de9630a39cf1c0ded1ea7d1092ec0f467c7a7/goemotions/data/test.tsv",
+      "bytes": 436706,
+      "sha256": "0587b2dd8b27b97352adbfc3fb083d46005c8946657fdc2b1ca8b1cc7f1f8be4"
+    }
+  }
+}

@@ -1,0 +1,2 @@
+# Optional: only scripts/figure.py needs this dependency.
+matplotlib==3.11.2
