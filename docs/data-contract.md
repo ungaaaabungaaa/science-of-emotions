@@ -1,0 +1,13 @@
+# Data and report contract, version 1
+
+`python3 -m emotion_lab fetch --data-dir PATH` retrieves only the four explicit HTTPS URLs in `data-source.json`. It refuses redirects, responses over 6,000,000 bytes, non-regular destination files, and SHA-256 mismatches. Existing matching files are reused. Existing changed files are never overwritten.
+
+`python3 -m emotion_lab analyze --data-dir PATH --out FILE` verifies all four hashes before parsing. The output file must not exist. `--check FILE` compares deterministic output to a previously generated report without writing. Both are mutually exclusive. Invalid input exits 2; file/network failures exit 1; success exits 0.
+
+Labels are UTF-8 nonempty lowercase identifiers, one per line; 28 in the locked official source. TSV input has no header and exactly three tab-separated fields: text, comma-separated numeric label IDs, and comment ID. Text is nonempty, at most 16,384 characters; IDs are nonempty ASCII alphanumerics, at most 64 characters. A row has between one and 28 unique label IDs in range. Each file has at most 50,000 nonempty rows and 6,000,000 bytes; a physical line has at most 65,536 bytes. Blank rows, invalid UTF-8, NULs, duplicate labels, and duplicate comment IDs within or across splits fail the whole run. No raw text or comment IDs enter the report.
+
+The JSON report has `schemaVersion: 1`, a source revision and four file hashes, an ordered `labels` list, and `splits` (`train`, `dev`, `test`, and `all`). Each split contains `rows`, `annotations`, `multiLabelRows`, `neutralWithOtherRows`, `labelCountHistogram`, `counts`, `rates`, `wilson95`, and a symmetric `pairCounts` matrix. The matrix diagonal equals each label count. A pair counts comments with both labels, once per comment. Rates use all comments in the selected split as denominator. Conditional rates in the viewer use the selected conditioning label's count. Empty conditioning sets have no estimate, rather than a rate of zero.
+
+The local viewer server binds only `127.0.0.1` and serves an explicit five-file allowlist from `web/`: index, stylesheet, two JavaScript modules, and aggregate JSON. GET and HEAD are supported. Other paths and symlinks fail closed; no directory listing, write route, or source-data route exists. Host headers must name loopback. The production build copies the same allowlist to `dist/`.
+
+Wilson intervals describe a binomial counting model for this dataset. Comments are not a random population sample; intervals do not establish population representativeness or account for annotator dependence. Pair comparisons are exploratory, without significance tests or causal claims. All output is deterministic: no clock timestamps, randomized models, inferred emotions, or raw comments.

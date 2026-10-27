@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore real human emotion annotations, label overlap, and the limits of a scientific dataset.">
+  <title>The Science of Emotions — Annotation Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#lab">Skip to the lab</a>
+  <header class="masthead"><a class="wordmark" href="#">THE SCIENCE<br>OF EMOTIONS<span class="brand-dot" aria-hidden="true"></span></a><span class="edition">ANNOTATION LAB<br>RESEARCH NOTE 001 / 2026</span><a class="header-link" href="#methods">Methods & sources ↗</a></header>
+  <main>
+    <section class="intro" aria-labelledby="title">
+      <div class="intro-copy"><p class="eyebrow">LANGUAGE · ANNOTATION · UNCERTAINTY</p><h1 id="title">One comment.<br>More than<br><em>one feeling.</em></h1><p class="lede">Emotion labels overlap. Explore how people annotated a real language dataset—and what those numbers can tell us.</p><a class="jump" href="#lab">Explore the evidence <span aria-hidden="true">↓</span></a></div>
+      <div class="hero-note"><span class="note-number">01—</span><div class="overlap-illustration" aria-hidden="true"><div class="emotion-circle circle-a">joy</div><div class="emotion-circle circle-b">optimism</div><span class="overlap-mark">+</span></div><p class="note-caption">TWO LABELS CAN DESCRIBE THE SAME COMMENT.</p><p class="note-text">We count annotations. We do not measure a person's inner experience.</p><div class="dataset-line"><strong id="hero-total">54,263</strong><span>distinct comments<br>in the published filtered splits</span></div></div>
+    </section>
+    <section class="lab" id="lab" aria-labelledby="lab-title">
+      <div class="section-top"><div><p class="eyebrow">THE DATA EXPLORER</p><h2 id="lab-title">Look closer.</h2></div><p>GoEmotions / 27 emotion categories + neutral<br>Human annotations, no prediction model</p></div>
+      <div id="load-error" class="error" role="alert" hidden></div>
+      <div id="lab-content" hidden>
+        <div class="control-row"><label for="split">Dataset split<select id="split"><option value="test">Test</option><option value="dev">Development</option><option value="train">Training</option><option value="all">All splits</option></select></label><div class="split-context" id="split-context" aria-live="polite"></div></div>
+        <div class="lab-grid">
+          <section class="frequency" aria-labelledby="frequency-title"><div class="chart-heading"><h3 id="frequency-title">How often was each label used?</h3><span>Share of comments</span></div><div id="frequency-bars" class="frequency-bars" aria-label="Label frequencies; select a label to inspect it"></div><p class="chart-note">A comment can have several labels, so these percentages do not sum to 100%.</p></section>
+          <div class="inspection">
+            <section class="selected-label" aria-labelledby="selected-title"><p class="eyebrow">SELECTED LABEL</p><h3 id="selected-title">Joy</h3><div class="large-number" id="selected-rate"></div><p id="selected-count"></p><div class="interval-block"><span>95% Wilson interval*</span><strong id="selected-interval"></strong></div><p class="interval-note">*A binomial counting model, not a population estimate. Dataset selection and annotation bias remain.</p></section>
+            <section class="pair-lab" aria-labelledby="pair-title"><p class="eyebrow">ANNOTATION OVERLAP</p><h3 id="pair-title">What appears together?</h3><div class="pair-controls"><label for="label-a">First label<select id="label-a"></select></label><span aria-hidden="true">+</span><label for="label-b">Second label<select id="label-b"></select></label></div><div class="pair-count"><strong id="pair-count"></strong><span>comments carry both labels</span></div><p id="pair-rate"></p><div class="conditional"><p id="given-a"></p><div class="conditional-track" aria-hidden="true"><span id="given-a-bar"></span></div><p id="given-b"></p><div class="conditional-track" aria-hidden="true"><span id="given-b-bar"></span></div></div><p class="chart-note" id="pair-note">Each percentage uses its named label's count as the denominator. Association does not establish a cause.</p></section>
+          </div>
+        </div>
+        <section class="split-check" aria-labelledby="split-title"><div><p class="eyebrow">A SMALL REPRODUCIBLE EXPERIMENT</p><h3 id="split-title">Does the label rate change between splits?</h3><p>Compare the same label in training and test data. This is a descriptive check on the released splits, not a significance test.</p></div><div class="split-result" aria-live="polite"><span id="split-selected"></span><div class="comparison-line"><span>Training</span><strong id="train-rate"></strong></div><div class="comparison-line"><span>Test</span><strong id="test-rate"></strong></div><div class="comparison-line difference"><span>Test − training</span><strong id="split-difference"></strong></div></div></section>
+        <div class="data-footnote"><p id="multi-note"></p><a href="assets/report.json" download="goemotions-aggregate-report.json">Download measured aggregates ↓</a></div>
+      </div>
+      <noscript><p>Enable JavaScript to explore the measurements, or <a href="assets/report.json">read the aggregate report</a>.</p></noscript>
+    </section>
+    <section class="methods" id="methods" aria-labelledby="methods-title"><div><p class="eyebrow">READ THE FINE PRINT</p><h2 id="methods-title">Evidence has<br> boundaries.</h2></div><div class="method-notes"><article><span>01 / WHAT WE COUNT</span><h3>Published annotations.</h3><p>Each comment contributes once to each of its released labels. Pair counts are intersections of those labels. The source contains English Reddit comments selected and labeled by the original research team.</p></article><article><span>02 / WHAT WE LEARN</span><h3>Overlap and imbalance.</h3><p>Some labels occur much more often than others. Multiple labels can coexist, including neutral with an emotion label. A category is not a discrete biological measurement.</p></article><article><span>03 / WHAT WE CANNOT CLAIM</span><h3>No mind reading.</h3><p>These rates do not represent all people, cultures, or languages. Annotation choices, platform demographics, and content filtering affect them. We do not infer mental state, diagnose, or reproduce the paper's BERT results.</p></article><article><span>04 / REPEAT THE WORK</span><h3>Four files. Locked hashes.</h3><p>Source files are pinned to a Git revision and SHA-256 checked. The pipeline rejects malformed records and repeated comment IDs. The viewer uses aggregate counts only; it does not collect personal text.</p></article></div></section>
+    <section class="sources" aria-labelledby="sources-title"><h2 id="sources-title">Sources & reproducibility</h2><div><a href="https://aclanthology.org/2020.acl-main.372/" rel="noreferrer">Demszky et al. / GoEmotions, ACL 2020 ↗</a><a href="https://github.com/google-research/google-research/tree/700de9630a39cf1c0ded1ea7d1092ec0f467c7a7/goemotions" rel="noreferrer">Pinned data, model card & Apache 2.0 license ↗</a><a href="https://github.com/ungaaaabungaaa/science-of-emotions" rel="noreferrer">Code, methods & a repeatable experiment ↗</a></div></section>
+  </main>
+  <footer><span>THE SCIENCE OF EMOTIONS / A REPRODUCIBLE RESEARCH LAB</span><span>Built 2026 · No accounts. No tracking.</span></footer>
+</body>
+</html>
