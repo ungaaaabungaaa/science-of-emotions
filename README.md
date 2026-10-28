@@ -70,3 +70,11 @@ python3 scripts/export_rates.py --split test --out test-rates.csv
 ```
 
 Choose `train`, `dev`, `test`, or `all`. The new CSV preserves each label's count, comment denominator, rate, and 95% Wilson interval from the bundled measured report. It contains no raw comments or IDs and never overwrites an existing file. Rates are fractions; labels can overlap. The intervals describe the binomial model in the methods, not population uncertainty or model accuracy. This table can accompany exported figures or be read in a spreadsheet.
+
+## Check sensitivity to rare labels
+
+```sh
+python3 scripts/rare_label_sensitivity.py --minimum-counts 1 10 50 --out rare-labels.json
+```
+
+For each released split and the pooled aggregate, this reports which labels meet each explicit minimum count, omitted label names, retained assignment counts, and their fraction of all label assignments. Total comment denominators remain unchanged. Assignment fractions are **not comment coverage** because labels overlap. The source aggregate is not filtered or rewritten. Thresholds are descriptive choices, without a statistical-significance or population claim. The JSON records the source-report hash and never overwrites an existing file.
