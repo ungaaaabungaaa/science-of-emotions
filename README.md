@@ -62,3 +62,11 @@ Data: [Demszky et al., GoEmotions, ACL 2020](https://aclanthology.org/2020.acl-m
 This repository became The Science of Emotions on **27 October 2026**. The previous Android project is preserved on [`archive/before-science-of-emotions-2026-10-27`](https://github.com/ungaaaabungaaa/science-of-emotions/tree/archive/before-science-of-emotions-2026-10-27). Earlier history and stars predate this lab. The portfolio website remains unchanged.
 
 MIT applies to the new project code. See [LICENSE](LICENSE).
+
+## Export an accessible data table
+
+```sh
+python3 scripts/export_rates.py --split test --out test-rates.csv
+```
+
+Choose `train`, `dev`, `test`, or `all`. The new CSV preserves each label's count, comment denominator, rate, and 95% Wilson interval from the bundled measured report. It contains no raw comments or IDs and never overwrites an existing file. Rates are fractions; labels can overlap. The intervals describe the binomial model in the methods, not population uncertainty or model accuracy. This table can accompany exported figures or be read in a spreadsheet.
